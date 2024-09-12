@@ -49,6 +49,8 @@ public class BootStrapData implements CommandLineRunner {
 
         patrickSaved.getBooks().add(doorsSaved);
         georgeSaved.getBooks().add(windSaved);
+        doorsSaved.getAuthors().add(patrickSaved);
+        windSaved.getAuthors().add(georgeSaved);
 
         Publisher sextante = new Publisher();
         sextante.setPublisherName("Sextante");
