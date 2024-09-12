@@ -2,8 +2,10 @@ package classes.guru.springframework.spring6webapp.bootstrap;
 
 import classes.guru.springframework.spring6webapp.domain.Author;
 import classes.guru.springframework.spring6webapp.domain.Book;
+import classes.guru.springframework.spring6webapp.domain.Publisher;
 import classes.guru.springframework.spring6webapp.repositories.AuthorRepository;
 import classes.guru.springframework.spring6webapp.repositories.BookRepository;
+import classes.guru.springframework.spring6webapp.repositories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +14,13 @@ public class BootStrapData implements CommandLineRunner {
 
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
+    private final PublisherRepository publisherRepository;
 
-    public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository) {
+    public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository,
+                         PublisherRepository publisherRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
+        this.publisherRepository = publisherRepository;
     }
 
     @Override
@@ -48,8 +53,18 @@ public class BootStrapData implements CommandLineRunner {
         authorRepository.save(patrickSaved);
         authorRepository.save(georgeSaved);
 
+        Publisher sextante = new Publisher();
+        sextante.setPublisherName("Sextante");
+        sextante.setCity("Sao Paulo");
+        sextante.setAddress("Imaginary Street");
+        sextante.setZipCode("99999-999");
+        sextante.setState("Sao Paulo");
+
+        Publisher sextanteSaved = publisherRepository.save(sextante);
+
         System.out.println("In bootstrap");
         System.out.println("Author count: " + authorRepository.count());
         System.out.println("Book count: " + bookRepository.count());
+        System.out.println("Publisher count: " + publisherRepository.count());
     }
 }
